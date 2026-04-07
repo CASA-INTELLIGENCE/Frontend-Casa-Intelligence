@@ -14,17 +14,25 @@ export default function AlexaPanel({ alexa, devices }) {
 
   const allAlexaDevices = echoDevices.length > 0 ? echoDevices : amazonOnNetwork;
 
-  // Use useApi hook for TTS (when credentials available)
+  // Use useApi hook for TTS
   const {
     loading: sendingTTS,
+    data: ttsResponse,
     execute: sendTTS,
   } = useApi('/api/alexa/tts', {
     method: 'POST',
     timeout: 10000,
-    onSuccess: () => {
-      setFeedback('✅ Message sent to Echo!');
+    onSuccess: (response) => {
+      const mode = response.mode || 'unknown';
+      if (mode === 'simulation') {
+        setFeedback('✅ Message simulated (demo mode)');
+      } else if (mode === 'demo') {
+        setFeedback('✅ Message prepared (credentials detected)');
+      } else {
+        setFeedback('✅ Message sent to Echo!');
+      }
       setTtsMessage('');
-      setTimeout(() => setFeedback(''), 3000);
+      setTimeout(() => setFeedback(''), 4000);
     },
     onError: (error) => {
       setFeedback(`❌ Failed: ${error}`);
@@ -36,8 +44,6 @@ export default function AlexaPanel({ alexa, devices }) {
     if (!ttsMessage.trim()) return;
     await sendTTS({ message: ttsMessage });
   };
-
-  const hasCredentials = false; // TODO: Check from backend config
 
   return (
     <div className="grid-2" style={{ alignItems: 'start' }}>
@@ -87,34 +93,39 @@ export default function AlexaPanel({ alexa, devices }) {
           <div className="alert-item warning">
             <span>🔐</span>
             <div>
-              <strong>Amazon credentials required</strong> to send voice messages.
+              <strong>Demo mode active</strong> — TTS messages are simulated for demonstration.
               Add <code style={{ background: 'rgba(0,0,0,0.3)', padding: '1px 4px', borderRadius: 3 }}>AMAZON_EMAIL</code> and{' '}
               <code style={{ background: 'rgba(0,0,0,0.3)', padding: '1px 4px', borderRadius: 3 }}>AMAZON_PASSWORD</code> to the{' '}
-              <code style={{ background: 'rgba(0,0,0,0.3)', padding: '1px 4px', borderRadius: 3 }}>.env</code> file to unlock TTS.
+              <code style={{ background: 'rgba(0,0,0,0.3)', padding: '1px 4px', borderRadius: 3 }}>.env</code> file for real Alexa API integration.
             </div>
           </div>
 
           <div style={{ marginTop: '1rem' }}>
             <input 
               type="text" 
-              placeholder="Type a message to announce..." 
-              disabled={!hasCredentials || sendingTTS}
+              placeholder="Type a message to announce (demo mode)..." 
+              disabled={sendingTTS}
               value={ttsMessage}
               onChange={(e) => setTtsMessage(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSendTTS()}
-              style={{ opacity: !hasCredentials ? 0.4 : 1, marginBottom: '0.5rem' }} 
+              style={{ marginBottom: '0.5rem' }} 
             />
             <button 
               className="btn btn-primary w-full" 
-              disabled={!hasCredentials || sendingTTS || !ttsMessage.trim()}
+              disabled={sendingTTS || !ttsMessage.trim()}
               onClick={handleSendTTS}
-              style={{ opacity: (!hasCredentials || !ttsMessage.trim()) ? 0.4 : 1, justifyContent: 'center' }}
+              style={{ opacity: !ttsMessage.trim() ? 0.4 : 1, justifyContent: 'center' }}
             >
-              {sendingTTS ? '📡 Sending...' : '📢 Send to Echo Dot'}
+              {sendingTTS ? '📡 Sending...' : '📢 Send to Echo Dot (Demo)'}
             </button>
             {feedback && (
               <div style={{ marginTop: '0.5rem', textAlign: 'center', fontSize: '0.9rem', fontWeight: 600 }}>
                 {feedback}
+              </div>
+            )}
+            {ttsResponse?.note && (
+              <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center' }}>
+                💡 {ttsResponse.note}
               </div>
             )}
           </div>
