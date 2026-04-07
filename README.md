@@ -2,7 +2,7 @@
 
 > **Dashboard premium para el monitoreo y control del ecosistema tecnológico del hogar.**
 
-Interfaz de usuario moderna y reactiva diseñada para centralizar el control de dispositivos **Samsung**, **Alexa** y el estado de la red **TP-Link**.
+Interfaz de usuario moderna y reactiva diseñada para centralizar el control de dispositivos **Samsung**, **Alexa** y el estado de la red **TP-Link**, con descubrimiento semi‑dinámico desde el backend (mDNS + SSDP).
 
 ## 🎨 Diseño y Experiencia (Aesthetics)
 
@@ -17,7 +17,7 @@ Interfaz de usuario moderna y reactiva diseñada para centralizar el control de 
 ## 🛠️ Stack Tecnológico
 
 - **Core:** React 18 + Vite
-- **Estado:** WebSockets (Custom Hook `useSmartHome`) para actualizaciones "zero-latency".
+- **Estado:** WebSockets (Custom Hook `useSmartHome`) para actualizaciones en tiempo real.
 - **Styling:** CSS puro siguiendo principios de diseño atómico y variables globales de diseño (Design Tokens).
 - **Iconografía:** Lucide React para una estética limpia y consistente.
 
@@ -31,7 +31,7 @@ Interfaz de usuario moderna y reactiva diseñada para centralizar el control de 
 2. **Variables de Entorno:**
    Configura el `.env` para apuntar al backend:
    ```env
-   VITE_API_URL=http://localhost:8002
+    VITE_API_URL=http://localhost:8000
    ```
 
 3. **Desarrollo:**
@@ -41,10 +41,14 @@ Interfaz de usuario moderna y reactiva diseñada para centralizar el control de 
 
 ## 🧠 Integración de IA
 
-El frontend no solo muestra datos; permite al usuario interactuar con la IA de Google Gemini para entender qué está pasando en su red. Al presionar "Analizar mi red", el sistema genera un reporte dinámico sobre:
+El frontend muestra insights generados por IA desde el backend (Groq como proveedor principal con fallback). Al presionar "Analizar mi red", el sistema genera un reporte dinámico sobre:
 - Puntaje de seguridad de la red local.
 - Recomendaciones de automatización personalizadas.
 - Análisis de uso de dispositivos.
+
+## 🎙️ Alexa (Demo)
+
+El panel de Alexa incluye envío de mensajes en **modo demo**. Esto permite mostrar la funcionalidad sin depender de credenciales reales. Para producción, se requiere integrar la API oficial de Amazon con credenciales.
 
 ---
 *Parte del Reto Técnico AdoptAI — Vibe Engineer Challenge*
