@@ -1,0 +1,144 @@
+.error-boundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+}
+
+.error-boundary-content {
+  max-width: 600px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(239, 68, 68, 0.2);
+}
+
+.error-boundary-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.error-boundary-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #dc2626;
+  margin: 0 0 16px 0;
+}
+
+.error-boundary-message {
+  font-size: 16px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0 0 32px 0;
+}
+
+.error-boundary-details {
+  margin: 24px 0;
+  text-align: left;
+  background: rgba(31, 41, 55, 0.05);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.error-boundary-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #374151;
+  user-select: none;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.error-boundary-details summary:hover {
+  background: rgba(31, 41, 55, 0.1);
+}
+
+.error-boundary-details-content {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(31, 41, 55, 0.1);
+}
+
+.error-boundary-error-message {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #dc2626;
+  margin: 0 0 12px 0;
+  word-break: break-word;
+}
+
+.error-boundary-stack {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #4b5563;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 12px;
+  border-radius: 4px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 0;
+}
+
+.error-boundary-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.error-boundary-retry-btn,
+.error-boundary-reload-btn {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  outline: none;
+}
+
+.error-boundary-retry-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.error-boundary-retry-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
+.error-boundary-retry-btn:active {
+  transform: translateY(0);
+}
+
+.error-boundary-reload-btn {
+  background: white;
+  color: #6b7280;
+  border: 2px solid #e5e7eb;
+}
+
+.error-boundary-reload-btn:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.error-boundary-reload-btn:active {
+  background: #f3f4f6;
+}

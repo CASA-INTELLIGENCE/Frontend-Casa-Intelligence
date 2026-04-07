@@ -1,0 +1,137 @@
+.connection-status {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  animation: slideInFromRight 0.3s ease-out;
+  max-width: 350px;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.connection-status-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.connection-status-message {
+  flex: 1;
+}
+
+/* States */
+.connection-status-connecting {
+  background: rgba(251, 191, 36, 0.95);
+  color: #78350f;
+  border: 1px solid #fbbf24;
+}
+
+.connection-status-connected {
+  background: rgba(34, 197, 94, 0.95);
+  color: #14532d;
+  border: 1px solid #22c55e;
+  animation: slideInFromRight 0.3s ease-out, fadeOut 0.5s 2.5s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(400px);
+  }
+}
+
+.connection-status-reconnecting {
+  background: rgba(249, 115, 22, 0.95);
+  color: #7c2d12;
+  border: 1px solid #f97316;
+}
+
+.connection-status-disconnected {
+  background: rgba(239, 68, 68, 0.95);
+  color: #7f1d1d;
+  border: 1px solid #ef4444;
+}
+
+.connection-status-failed {
+  background: rgba(220, 38, 38, 0.95);
+  color: #ffffff;
+  border: 1px solid #dc2626;
+}
+
+/* Icons */
+.connection-spinner {
+  animation: spin 1.5s linear infinite;
+  display: inline-block;
+  font-size: 18px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.connection-checkmark {
+  font-size: 18px;
+}
+
+.connection-dot {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.connection-dot-red {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.connection-error {
+  font-size: 18px;
+}
+
+/* Reconnect button */
+.connection-status-reconnect-btn {
+  background: rgba(255, 255, 255, 0.9);
+  color: #dc2626;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.connection-status-reconnect-btn:hover {
+  background: #ffffff;
+  transform: scale(1.05);
+}
+
+.connection-status-reconnect-btn:active {
+  transform: scale(0.95);
+}
