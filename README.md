@@ -29,9 +29,9 @@ Interfaz de usuario moderna y reactiva diseñada para centralizar el control de 
    ```
 
 2. **Variables de Entorno:**
-   Configura el `.env` para apuntar al backend:
+   Configura el `.env` para apuntar al backend (ngrok en despliegue):
    ```env
-    VITE_API_URL=http://localhost:8000
+    VITE_API_URL=https://TU_SUBDOMINIO.ngrok-free.dev
    ```
 
 3. **Desarrollo:**

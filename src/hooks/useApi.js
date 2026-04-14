@@ -114,6 +114,7 @@ export function useApi(endpoint, options = {}) {
           signal: controller.signal,
           headers: {
             'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true',
           },
         };
 
